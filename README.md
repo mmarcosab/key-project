@@ -41,10 +41,12 @@ Inclusão
 
 4) Não deve permitir o registro de chaves duplicadas. O valor informado no campo VALOR
    CHAVE, não deve existir para outro correntista do banco.
+   
    ![image](https://user-images.githubusercontent.com/40812575/196010358-27d9ee34-6293-4594-935f-1f4d35016a55.png)
 
    
 5) Deve ser registrado a data e hora em que a chave foi registrada
+
 ![image](https://user-images.githubusercontent.com/40812575/196010400-8ff6870a-0140-4556-862a-417ce5008e3a.png)
 
 
