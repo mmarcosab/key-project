@@ -30,18 +30,25 @@
 
 Inclusão
 1. Deve registrar em banco de dados as informações imputadas
-
-
-
-
+![image](https://user-images.githubusercontent.com/40812575/196010229-057fd6e2-fd48-42d3-9923-5500b0c4e3a6.png)
 
 2) Deve gerar um código de registro único (id), independentemente do tipo de chave
    registrado (celular, e-mail, CPF, CNPJ etc...)
    a) A chave (ID) deve ser no formato UUID.
+   ![image](https://user-images.githubusercontent.com/40812575/196010292-30edac5a-ffc6-44eb-962f-1a760c88b9a6.png)
+
+   
 3) Limitar em até 5 chaves por conta para pessoa física e 20 chaves para pessoa jurídica
+
 4) Não deve permitir o registro de chaves duplicadas. O valor informado no campo VALOR
    CHAVE, não deve existir para outro correntista do banco.
+   ![image](https://user-images.githubusercontent.com/40812575/196010358-27d9ee34-6293-4594-935f-1f4d35016a55.png)
+
+   
 5) Deve ser registrado a data e hora em que a chave foi registrada
+![image](https://user-images.githubusercontent.com/40812575/196010400-8ff6870a-0140-4556-862a-417ce5008e3a.png)
+
+
 6) Deve validar as regras de cadastro seguindo os tipos e regras abaixo:
    a) Celular:
    i) Deve validar se valor já existe cadastrado
