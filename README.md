@@ -35,8 +35,7 @@ Inclusão
 2) Deve gerar um código de registro único (id), independentemente do tipo de chave
    registrado (celular, e-mail, CPF, CNPJ etc...)
    a) A chave (ID) deve ser no formato UUID.
-   ![image](https://user-images.githubusercontent.com/40812575/196010292-30edac5a-ffc6-44eb-962f-1a760c88b9a6.png)
-
+   ![image](https://user-images.githubusercontent.com/40812575/196010438-75a2fd3e-b559-4a61-9a52-10a4fafc9b9b.png)
    
 3) Limitar em até 5 chaves por conta para pessoa física e 20 chaves para pessoa jurídica
 
@@ -66,11 +65,17 @@ Inclusão
    ii) Deve conter o símbolo “@”
    iii) Pode conter valores alfanuméricos
    iv) Maximo de 77 caracteres
+   
+   
+   
    c) CPF:
    i) Deve validar se valor já existe cadastrado
    ii) Deve conter no máximo 11 dígitos
    iii) Deve fazer validação de CPF válido
    iv) Deve aceitar somente números
+   
+   
+   
    d) CNPJ:
    i) Deve validar se valor já existe cadastrado
    ii) Deve conter no máximo 14 dígitos
@@ -85,10 +90,12 @@ f) TIPO CONTA
 i) Somente permite os valores (corrente ou poupança)
 ii) Deve ser informado obrigatoriamente
 iii) Não deve permitir estourar 10 caracteres
+
 g) NÚMERO AGÊNCIA
 i) Deve permitir somente valores numéricos
 ii) Deve ser informado obrigatoriamente
 iii) Não deve permitir estourar 4 digitos
+
 h) NÚMERO CONTA
 i) Deve permitir somente valores numéricos
 ii) Deve ser informado obrigatoriamente
