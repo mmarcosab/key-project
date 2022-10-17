@@ -56,7 +56,7 @@ public class InactivateKeyUseCaseImpl implements InactivateKeyUseCase {
             );
 
         } catch(KeyNotFoundException knf) {
-            return keyPixPresenter.prepareInactiveKeyResponseFailView(knf.getMessage());
+            return keyPixPresenter.prepareInactivateNotFoundKeyResponseFailView();
         } catch(KeyAlreadyInactiveException kai) {
             return keyPixPresenter.prepareInactiveKeyResponseFailView(kai.getMessage());
         } catch(Exception e) {

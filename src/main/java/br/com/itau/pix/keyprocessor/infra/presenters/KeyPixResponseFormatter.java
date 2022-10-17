@@ -73,4 +73,24 @@ public class KeyPixResponseFormatter implements KeyPixPresenter {
         throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, error);
     }
 
+    @Override
+    public UpdateKeyResponse prepareUpdateKeyNotFoundKeyResponseFailView() {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public GetKeyResponse prepareGetNotFoundKeyResponseFailView() {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public CreateKeyResponse prepareCreateNotFoundKeyResponseFailView() {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public InactivateKeyResponse prepareInactivateNotFoundKeyResponseFailView() {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
 }

@@ -2,6 +2,8 @@ package br.com.itau.pix.keyprocessor.domain.usecase.impl;
 
 import br.com.itau.pix.keyprocessor.domain.AccountValidator;
 import br.com.itau.pix.keyprocessor.domain.KeyPix;
+import br.com.itau.pix.keyprocessor.domain.exception.KeyAlreadyInactiveException;
+import br.com.itau.pix.keyprocessor.domain.exception.KeyNotFoundException;
 import br.com.itau.pix.keyprocessor.domain.factory.KeyPixFactory;
 import br.com.itau.pix.keyprocessor.domain.port.KeyPixPresenter;
 import br.com.itau.pix.keyprocessor.domain.port.KeyRepository;
@@ -28,17 +30,19 @@ public class UpdateKeyUseCaseImpl implements UpdateKeyUseCase {
     public UpdateKeyResponse update(UpdateKeyRequest updateKeyRequest, String id) {
         try {
             var optionalKeyPix = keyRepository.findById(id);
-            if(optionalKeyPix.isEmpty()) {
-                return keyPixPresenter.prepareUpdateKeyResponseFailView("Key with this id don't exist");
+            if (optionalKeyPix.isEmpty()) {
+                throw new KeyNotFoundException();
             }
             var keyPix = optionalKeyPix.get();
-            if(!keyPix.isActive()) {
-                return keyPixPresenter.prepareUpdateKeyResponseFailView("Key is inactive");
+            if (!keyPix.isActive()) {
+                throw new KeyAlreadyInactiveException();
             }
             var keyPixUpdated = createDomain(updateKeyRequest, keyPix);
             AccountValidator.isValid(keyPix.getAccountType(), keyPix.getAgencyNumber(), keyPix.getAccountNumber());
             keyRepository.save(keyPixUpdated);
             return keyPixPresenter.prepareSuccessView(createResponse(keyPixUpdated));
+        } catch(KeyNotFoundException k) {
+            return keyPixPresenter.prepareUpdateKeyNotFoundKeyResponseFailView();
         } catch(Exception e) {
             logger.info("ERRO: " + e.getMessage());
             return keyPixPresenter.prepareUpdateKeyResponseFailView(e.getMessage());

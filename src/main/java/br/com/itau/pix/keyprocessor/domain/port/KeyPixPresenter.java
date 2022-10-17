@@ -19,4 +19,9 @@ public interface KeyPixPresenter {
     InactivateKeyResponse prepareInactiveKeyResponseFailView(String error);
     UpdateKeyResponse prepareSuccessView(UpdateKeyResponse createKeyResponse);
     UpdateKeyResponse prepareUpdateKeyResponseFailView(String error);
+    UpdateKeyResponse prepareUpdateKeyNotFoundKeyResponseFailView();
+    GetKeyResponse prepareGetNotFoundKeyResponseFailView();
+    CreateKeyResponse prepareCreateNotFoundKeyResponseFailView();
+    InactivateKeyResponse prepareInactivateNotFoundKeyResponseFailView();
+
 }

@@ -12,6 +12,7 @@ import br.com.itau.pix.keyprocessor.domain.usecase.CreateKeyUseCase;
 import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyRequest;
 import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyResponse;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ public class CreateKeyUseCaseImpl implements CreateKeyUseCase {
             KeyValidator.isValid(keyPix.getType(), keyPix.getValue());
             AccountValidator.isValid(keyPix.getAccountType(), keyPix.getAgencyNumber(), keyPix.getAccountNumber());
             if(keyRepository.existsByValue(keyPix.getValue())) {
-                return keyPixPresenter.prepareCreateKeyResponseFailView("Key with this value already exists");
+                throw new KeyAlreadyExistsException();
             }
             final String typeAccount = accountTypeRepository.verifyTypeAccount(keyPix.getAgencyNumber(), keyPix.getAccountNumber());
             if("PF".equals(typeAccount)) {

@@ -1,6 +1,7 @@
 package br.com.itau.pix.keyprocessor.domain.usecase.impl;
 
 import br.com.itau.pix.keyprocessor.domain.KeyPix;
+import br.com.itau.pix.keyprocessor.domain.exception.KeyNotFoundException;
 import br.com.itau.pix.keyprocessor.domain.port.KeyPixPresenter;
 import br.com.itau.pix.keyprocessor.domain.port.KeyRepository;
 import br.com.itau.pix.keyprocessor.domain.usecase.GetKeyUseCase;
@@ -26,8 +27,8 @@ public class GetKeyUseCaseImpl implements GetKeyUseCase {
     public GetKeyResponse byId(final String id) {
         try {
             var optionalKey = keyRepository.findById(id);
-            if(optionalKey.isEmpty()) {
-                return keyPixPresenter.prepareGetKeyResponseFailView("Key with id " + id + " don't exists");
+            if (optionalKey.isEmpty()) {
+                throw new KeyNotFoundException();
             }
             var keyPix = optionalKey.get();
             return keyPixPresenter.prepareSuccessView(
@@ -45,6 +46,8 @@ public class GetKeyUseCaseImpl implements GetKeyUseCase {
                             keyPix.getDateTimeUpdate()
                     )
             );
+        } catch(KeyNotFoundException k) {
+            return keyPixPresenter.prepareGetNotFoundKeyResponseFailView();
         } catch(Exception e) {
             logger.info("ERRO: " + e.getMessage());
             return keyPixPresenter.prepareGetKeyResponseFailView(e.getMessage());
