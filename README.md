@@ -3,6 +3,7 @@
 ![technology Java](https://img.shields.io/badge/technology-java-blue.svg)
 ![technology Spring Boot](https://img.shields.io/badge/technology-spring-boot.svg)
 ![technology MySQL](https://img.shields.io/badge/technology-mysql.svg)
+![technology Swagger](https://img.shields.io/badge/tetchnology-swagger-io.svg)
 
 ### Prerequisites
 
@@ -13,6 +14,7 @@
 * [MySQL](https://www.mysql.com/)
 * [Docker](https://www.docker.com/products/docker-desktop)
 * [SemVer](http://semver.org/)
+* [Swagger](https://swagger.io/)
 * [K8s](https://kubernetes.io/)
 
 ### Instructions

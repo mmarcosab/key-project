@@ -84,7 +84,7 @@ public class KeyPixResponseFormatter implements KeyPixPresenter {
     }
 
     @Override
-    public CreateKeyResponse prepareCreateNotFoundKeyResponseFailView() {
+    public List<GetKeyResponse> prepareListGetNotFoundKeyResponseFailView() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 

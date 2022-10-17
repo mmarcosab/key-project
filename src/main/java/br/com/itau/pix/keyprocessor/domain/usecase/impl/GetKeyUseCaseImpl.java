@@ -59,7 +59,7 @@ public class GetKeyUseCaseImpl implements GetKeyUseCase {
         try {
             var optionalKey = keyRepository.findByValue(value);
             if(optionalKey.isEmpty()) {
-                return keyPixPresenter.prepareGetKeyResponseFailView("Key with value " + value + " don't exists");
+                throw new KeyNotFoundException();
             }
             var keyPix = optionalKey.get();
             return keyPixPresenter.prepareSuccessView(
@@ -77,6 +77,8 @@ public class GetKeyUseCaseImpl implements GetKeyUseCase {
                             keyPix.getDateTimeUpdate()
                     )
             );
+        } catch(KeyNotFoundException k) {
+            return keyPixPresenter.prepareGetNotFoundKeyResponseFailView();
         } catch(Exception e) {
             logger.info("ERRO: " + e.getMessage());
             return keyPixPresenter.prepareGetKeyResponseFailView(e.getMessage());
@@ -97,7 +99,12 @@ public class GetKeyUseCaseImpl implements GetKeyUseCase {
                     agencyNumber,
                     accountNumber
             );
+            if(keyData.isEmpty()) {
+                throw new KeyNotFoundException();
+            }
             return keyPixPresenter.prepareSuccessView(keyData.stream().map(key -> convert(key)).collect(Collectors.toList()));
+        } catch(KeyNotFoundException k) {
+            return keyPixPresenter.prepareListGetNotFoundKeyResponseFailView();
         } catch(Exception e) {
             logger.info("ERRO: " + e.getMessage());
             return keyPixPresenter.prepareListGetKeyResponseFailView(e.getMessage());

@@ -75,7 +75,6 @@ public class GetKeyUseCaseImplTest {
         assertDoesNotThrow(() -> getKeyUseCase.byCombinedFilter("test", "test", "test", "test", "test"));
     }
 
-
     private KeyPix mockKeyPix() {
         return new KeyPix(
                 "s69d.6cb-0022-41ae-aa4c-2799fa6c22e2",
