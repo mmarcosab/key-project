@@ -4,6 +4,7 @@ import br.com.itau.pix.keyprocessor.domain.AccountValidator;
 import br.com.itau.pix.keyprocessor.domain.KeyPix;
 import br.com.itau.pix.keyprocessor.domain.KeyValidator;
 import br.com.itau.pix.keyprocessor.domain.exception.ExceededQuantityException;
+import br.com.itau.pix.keyprocessor.domain.exception.KeyAlreadyExistsException;
 import br.com.itau.pix.keyprocessor.domain.factory.KeyPixFactory;
 import br.com.itau.pix.keyprocessor.domain.port.AccountTypeRepository;
 import br.com.itau.pix.keyprocessor.domain.port.KeyPixPresenter;
@@ -12,7 +13,6 @@ import br.com.itau.pix.keyprocessor.domain.usecase.CreateKeyUseCase;
 import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyRequest;
 import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyResponse;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
@@ -38,19 +38,21 @@ public class CreateKeyUseCaseImpl implements CreateKeyUseCase {
             var keyPix = make(createKeyRequest);
             KeyValidator.isValid(keyPix.getType(), keyPix.getValue());
             AccountValidator.isValid(keyPix.getAccountType(), keyPix.getAgencyNumber(), keyPix.getAccountNumber());
-            if(keyRepository.existsByValue(keyPix.getValue())) {
+            if (keyRepository.existsByValue(keyPix.getValue())) {
                 throw new KeyAlreadyExistsException();
             }
             final String typeAccount = accountTypeRepository.verifyTypeAccount(keyPix.getAgencyNumber(), keyPix.getAccountNumber());
-            if("PF".equals(typeAccount)) {
+            if ("PF".equals(typeAccount)) {
                 verifyQuantityPF(keyPix.getAgencyNumber(), keyPix.getAccountNumber());
             } else {
                 verifyQuantityPJ(keyPix.getAgencyNumber(), keyPix.getAccountNumber());
             }
             final String id = keyRepository.save(keyPix);
             return keyPixPresenter.prepareSuccessView(new CreateKeyResponse(id));
+
+        } catch(KeyAlreadyExistsException ke){
+            return keyPixPresenter.prepareCreateKeyResponseFailView(ke.getMessage());
         } catch(Exception e) {
-            logger.info("ERRO: " + e.getMessage());
             return keyPixPresenter.prepareCreateKeyResponseFailView(e.getMessage());
         }
 

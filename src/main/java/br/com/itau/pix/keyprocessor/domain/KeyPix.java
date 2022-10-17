@@ -1,6 +1,7 @@
 package br.com.itau.pix.keyprocessor.domain;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class KeyPix {
 
@@ -24,6 +25,7 @@ public class KeyPix {
     public KeyPix(final String name, final String type, final String value, final String accountType, final String agencyNumber,
                   final String accountNumber, final String accountHolderName, final String accountHolderLastName,
                   final  LocalDateTime dateTimeInclusion, final  LocalDateTime dateTimeUUpdate, final Integer active) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.type = type;
         this.value = value;

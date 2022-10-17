@@ -8,6 +8,7 @@ import br.com.itau.pix.keyprocessor.domain.usecase.InactivateKeyUseCase;
 import br.com.itau.pix.keyprocessor.infra.rest.InactivateKeyResponse;
 import br.com.itau.pix.keyprocessor.infra.rest.factory.InactivateKeyResponseFactory;
 
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 public class InactivateKeyUseCaseImpl implements InactivateKeyUseCase {
@@ -50,7 +51,7 @@ public class InactivateKeyUseCaseImpl implements InactivateKeyUseCase {
                             keyPix.getAccountHolderName(),
                             keyPix.getAccountHolderLastName(),
                             keyPix.getDateTimeInclusion(),
-                            keyPix.getDateTimeUpdate(),
+                            LocalDateTime.now(),
                             keyPix.isActive()
                     )
             );
