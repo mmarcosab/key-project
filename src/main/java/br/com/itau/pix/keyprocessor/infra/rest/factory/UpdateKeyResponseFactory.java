@@ -1,6 +1,6 @@
 package br.com.itau.pix.keyprocessor.infra.rest.factory;
 
-import br.com.itau.pix.keyprocessor.infra.rest.UpdateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.UpdateKeyResponse;
 
 import java.time.LocalDateTime;
 

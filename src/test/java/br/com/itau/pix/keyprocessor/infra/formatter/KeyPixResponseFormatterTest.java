@@ -1,10 +1,10 @@
 package br.com.itau.pix.keyprocessor.infra.formatter;
 
 import br.com.itau.pix.keyprocessor.infra.presenters.KeyPixResponseFormatter;
-import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.GetKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.InactivateKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.UpdateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.CreateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.GetKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.InactivateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.UpdateKeyResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

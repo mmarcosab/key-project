@@ -1,10 +1,11 @@
-package br.com.itau.pix.keyprocessor.infra.rest;
+package br.com.itau.pix.keyprocessor.infra.rest.out;
 
 
+import br.com.itau.pix.keyprocessor.infra.rest.out.Response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class CreateKeyResponse {
+public class CreateKeyResponse extends Response {
 
     @JsonProperty("id")
     private String id;

@@ -1,6 +1,6 @@
 package br.com.itau.pix.keyprocessor.infra.rest.factory;
 
-import br.com.itau.pix.keyprocessor.infra.rest.InactivateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.InactivateKeyResponse;
 import java.time.LocalDateTime;
 
 public final class InactivateKeyResponseFactory {

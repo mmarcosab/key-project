@@ -4,8 +4,8 @@ import br.com.itau.pix.keyprocessor.domain.KeyPix;
 import br.com.itau.pix.keyprocessor.domain.port.AccountTypeRepository;
 import br.com.itau.pix.keyprocessor.domain.port.KeyPixPresenter;
 import br.com.itau.pix.keyprocessor.domain.port.KeyRepository;
-import br.com.itau.pix.keyprocessor.domain.usecase.impl.CreateKeyUseCaseImpl;
-import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyRequest;
+import br.com.itau.pix.keyprocessor.domain.usecase.impl.KeyPixServiceImpl;
+import br.com.itau.pix.keyprocessor.infra.rest.in.CreateKeyRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class CreationKeyUseCaseImplTest {
 
     private KeyRepository keyRepository;
     private KeyPixPresenter keyPixPresenter;
-    private CreateKeyUseCaseImpl createKeyUseCase;
+    private KeyPixServiceImpl keyPixService;
     private AccountTypeRepository accountTypeRepository;
 
     @BeforeEach
@@ -26,7 +26,7 @@ public class CreationKeyUseCaseImplTest {
         keyRepository = mock(KeyRepository.class);
         keyPixPresenter = mock(KeyPixPresenter.class);
         accountTypeRepository = mock(AccountTypeRepository.class);
-        createKeyUseCase = new CreateKeyUseCaseImpl(keyRepository, keyPixPresenter, accountTypeRepository);
+        keyPixService = new KeyPixServiceImpl(keyRepository, keyPixPresenter, accountTypeRepository);
     }
 
     @Test
@@ -35,14 +35,14 @@ public class CreationKeyUseCaseImplTest {
         when(accountTypeRepository.verifyTypeAccount(anyString(), anyString())).thenReturn("PF");
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(4);
         when(keyRepository.save(any())).thenReturn("c23fcc72-fb3e-4cd4-be33-5d438ea7c2c0");
-        assertDoesNotThrow(() -> createKeyUseCase.create(mockRequest()));
+        assertDoesNotThrow(() -> keyPixService.create(mockRequest()));
     }
 
     @Test
     public void givenAExistentKeyRequestThenThrowAnException() {
         when(keyRepository.existsByValue(anyString())).thenReturn(true);
         when(keyRepository.save(any())).thenReturn("c23fcc72-fb3e-4cd4-be33-5d438ea7c2c0");
-        assertDoesNotThrow(() -> createKeyUseCase.create(mockRequest()));
+        assertDoesNotThrow(() -> keyPixService.create(mockRequest()));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CreationKeyUseCaseImplTest {
         when(accountTypeRepository.verifyTypeAccount(anyString(), anyString())).thenReturn("PF");
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(5);
         when(keyRepository.save(any())).thenReturn("c23fcc72-fb3e-4cd4-be33-5d438ea7c2c0");
-        assertDoesNotThrow(() -> createKeyUseCase.create(mockRequest()));
+        assertDoesNotThrow(() -> keyPixService.create(mockRequest()));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class CreationKeyUseCaseImplTest {
         when(accountTypeRepository.verifyTypeAccount(anyString(), anyString())).thenReturn("PJ");
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(20);
         when(keyRepository.save(any())).thenReturn("c23fcc72-fb3e-4cd4-be33-5d438ea7c2c0");
-        assertDoesNotThrow(() -> createKeyUseCase.create(mockRequest()));
+        assertDoesNotThrow(() -> keyPixService.create(mockRequest()));
     }
 
     private KeyPix mockKeyPix() {

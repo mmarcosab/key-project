@@ -1,13 +1,12 @@
-package br.com.itau.pix.keyprocessor.infra.rest;
+package br.com.itau.pix.keyprocessor.infra.rest.out;
 
-
+import br.com.itau.pix.keyprocessor.infra.rest.out.Response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
-
-public class UpdateKeyResponse {
+public class InactivateKeyResponse extends Response {
 
     @JsonProperty("id")
     private String id;
@@ -31,16 +30,14 @@ public class UpdateKeyResponse {
     @JsonProperty("date_time_inclusion")
     private LocalDateTime dateTimeInclusion;        //NUMERO CONTA Numérico (8) SIM
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty("date_time_update")
+    @JsonProperty("date_time_inactivation")
     private LocalDateTime dateTimeUpdate;           //NOME CORRENTISTA
+    @JsonProperty("active")
+    private boolean active;
 
-    public UpdateKeyResponse(final String id) {
-        this.id = id;
-    }
-
-    public UpdateKeyResponse(String id, String name, String type, String value, String accountType,
-                          String agencyNumber, String accountNumber, String accountHolderName, String accountHolderLastName,
-                          LocalDateTime dateTimeInclusion, LocalDateTime dateTimeUpdate) {
+    public InactivateKeyResponse(String id, String name, String type, String value, String accountType,
+                                 String agencyNumber, String accountNumber, String accountHolderName, String accountHolderLastName,
+                                 LocalDateTime dateTimeInclusion, LocalDateTime dateTimeUpdate, boolean active) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -52,6 +49,7 @@ public class UpdateKeyResponse {
         this.accountHolderLastName = accountHolderLastName;
         this.dateTimeInclusion = dateTimeInclusion;
         this.dateTimeUpdate = dateTimeUpdate;
+        this.active = active;
     }
 
     public String getId() {
@@ -98,4 +96,7 @@ public class UpdateKeyResponse {
         return dateTimeUpdate;
     }
 
+    public boolean isActive() {
+        return active;
+    }
 }

@@ -104,7 +104,6 @@ public class MySqlDBKeyPixRepository implements KeyRepository {
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 keyPix.isActive()? 1 : 0);
-
     }
 
     private KeyPix convertToDomain(final KeyPixJpa keyPixData) {

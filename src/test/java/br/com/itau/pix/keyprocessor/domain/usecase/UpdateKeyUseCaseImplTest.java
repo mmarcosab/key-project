@@ -1,10 +1,11 @@
 package br.com.itau.pix.keyprocessor.domain.usecase;
 
 import br.com.itau.pix.keyprocessor.domain.KeyPix;
+import br.com.itau.pix.keyprocessor.domain.port.AccountTypeRepository;
 import br.com.itau.pix.keyprocessor.domain.port.KeyPixPresenter;
 import br.com.itau.pix.keyprocessor.domain.port.KeyRepository;
-import br.com.itau.pix.keyprocessor.domain.usecase.impl.UpdateKeyUseCaseImpl;
-import br.com.itau.pix.keyprocessor.infra.rest.UpdateKeyRequest;
+import br.com.itau.pix.keyprocessor.domain.usecase.impl.KeyPixServiceImpl;
+import br.com.itau.pix.keyprocessor.infra.rest.in.UpdateKeyRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,41 +19,43 @@ public class UpdateKeyUseCaseImplTest {
 
     private KeyRepository keyRepository;
     private KeyPixPresenter keyPixPresenter;
-    private UpdateKeyUseCaseImpl updateKeyUseCase;
+    private KeyPixServiceImpl keyPixService;
+    private AccountTypeRepository accountTypeRepository;
 
     @BeforeEach
     public void init() {
         keyRepository = mock(KeyRepository.class);
         keyPixPresenter = mock(KeyPixPresenter.class);
-        updateKeyUseCase = new UpdateKeyUseCaseImpl(keyRepository, keyPixPresenter);
+        accountTypeRepository = mock(AccountTypeRepository.class);
+        keyPixService = new KeyPixServiceImpl(keyRepository, keyPixPresenter, accountTypeRepository);
     }
 
     @Test
     public void givenARequestThenThrowAnException() {
         when(keyRepository.findById(anyString())).thenReturn(Optional.of(mockKeyPix()));
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(4);
-        assertDoesNotThrow(() -> updateKeyUseCase.update(mockRequest(), "test"));
+        assertDoesNotThrow(() -> keyPixService.update(mockRequest(), "test"));
     }
 
     @Test
     public void givenARequestThenUpdateAKey() {
         when(keyRepository.findById(anyString())).thenReturn(Optional.of(mockCompleteKeyPix()));
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(4);
-        assertDoesNotThrow(() -> updateKeyUseCase.update(mockRequest(), "test"));
+        assertDoesNotThrow(() -> keyPixService.update(mockRequest(), "test"));
     }
 
     @Test
     public void givenARequestThenReturnAInactiveKey() {
         when(keyRepository.findById(anyString())).thenReturn(Optional.of(mockCompleteInactiveKeyPix()));
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(4);
-        assertDoesNotThrow(() -> updateKeyUseCase.update(mockRequest(), "test"));
+        assertDoesNotThrow(() -> keyPixService.update(mockRequest(), "test"));
     }
 
     @Test
     public void givenARequestThenReturNoKey() {
         when(keyRepository.findById(anyString())).thenReturn(Optional.empty());
         when(keyRepository.countByAccount(anyString(), anyString())).thenReturn(4);
-        assertDoesNotThrow(() -> updateKeyUseCase.update(mockRequest(), "test"));
+        assertDoesNotThrow(() -> keyPixService.update(mockRequest(), "test"));
     }
 
     private KeyPix mockKeyPix() {

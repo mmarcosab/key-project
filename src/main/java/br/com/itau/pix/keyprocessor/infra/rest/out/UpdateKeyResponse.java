@@ -1,40 +1,48 @@
-package br.com.itau.pix.keyprocessor.infra.rest;
+package br.com.itau.pix.keyprocessor.infra.rest.out;
 
+
+import br.com.itau.pix.keyprocessor.infra.rest.out.Response;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
-public class CreateKeyRequest {
 
-    @NotNull(message = "field name can not be null")
+public class UpdateKeyResponse extends Response {
+
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("name")
     private String name;                            //Nome Tipo Dado Obrigatório
-    @NotNull(message = "field name can not be null")
     @JsonProperty("type")
     private String type;                            //TIPO CHAVE (celular|email|cpf|cnpj|aleatorio) Texto (9) SIM
-    @NotNull(message = "field value can not be null")
     @JsonProperty("value")
     private String value;                           //VALOR CHAVE Texto (77) SIM
-    @NotNull(message = "field account_type can not be null")
     @JsonProperty("account_type")
     private String accountType;                     //TIPO CONTA (corrente|poupança) Texto (10) SIM
-    @NotNull(message = "field name can not be null")
     @JsonProperty("agency_number")
     private String agencyNumber;                    //NUMERO AGENCIA Numérico (4) SIM
-    @NotNull(message = "field account_number can not be null")
     @JsonProperty("account_number")
     private String accountNumber;                   //NUMERO CONTA Numérico (8) SIM
-    @NotNull(message = "field account_holder_name can not be null")
     @JsonProperty("account_holder_name")
     private String accountHolderName;                //NOME CORRENTISTA
     @JsonProperty("account_holder_last_name")
     private String accountHolderLastName;            //SOBRENOME CORRENTISTA Texto (45) NÃO
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("date_time_inclusion")
+    private LocalDateTime dateTimeInclusion;        //NUMERO CONTA Numérico (8) SIM
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("date_time_update")
+    private LocalDateTime dateTimeUpdate;           //NOME CORRENTISTA
 
-    private CreateKeyRequest() {
-
+    public UpdateKeyResponse(final String id) {
+        this.id = id;
     }
 
-    public CreateKeyRequest(String name, String type, String value, String accountType, String agencyNumber, String accountNumber, String accountHolderName, String accountHolderLastName) {
+    public UpdateKeyResponse(String id, String name, String type, String value, String accountType,
+                          String agencyNumber, String accountNumber, String accountHolderName, String accountHolderLastName,
+                          LocalDateTime dateTimeInclusion, LocalDateTime dateTimeUpdate) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.value = value;
@@ -43,6 +51,12 @@ public class CreateKeyRequest {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.accountHolderLastName = accountHolderLastName;
+        this.dateTimeInclusion = dateTimeInclusion;
+        this.dateTimeUpdate = dateTimeUpdate;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -76,4 +90,13 @@ public class CreateKeyRequest {
     public String getAccountHolderLastName() {
         return accountHolderLastName;
     }
+
+    public LocalDateTime getDateTimeInclusion() {
+        return dateTimeInclusion;
+    }
+
+    public LocalDateTime getDateTimeUpdate() {
+        return dateTimeUpdate;
+    }
+
 }

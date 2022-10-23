@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "key_pix")
+@Table(name = "entity")
 public class KeyPixJpa {
 
     @Id
@@ -15,21 +15,21 @@ public class KeyPixJpa {
     private String id;
     @NotNull
     @Column(name = "name")
-    private String name;                            //Nome Tipo Dado Obrigatório
+    private String name;
     @Column(name = "type", length = 9)
-    private String type;                            //TIPO CHAVE (celular|email|cpf|cnpj|aleatorio) Texto (9) SIM
+    private String type;
     @Column(name = "value", length = 77)
-    private String value;                           //VALOR CHAVE Texto (77) SIM
+    private String value;
     @Column(name = "account_type", length = 10)
-    private String accountType;                     //TIPO CONTA (corrente|poupança) Texto (10) SIM
+    private String accountType;
     @Column(name = "agency_number", length = 4)
-    private String agencyNumber;                    //NUMERO AGENCIA Numérico (4) SIM
+    private String agencyNumber;
     @Column(name = "account_number", length = 8)
-    private String accountNumber;                   //NUMERO CONTA Numérico (8) SIM
+    private String accountNumber;
     @Column(name = "account_holder_first_name")
-    private String accountHolderName;                //NOME CORRENTISTA
+    private String accountHolderName;
     @Column(name = "account_holder_last_name", length = 45)
-    private String accountHolderLastName;            //SOBRENOME CORRENTISTA Texto (45) NÃO
+    private String accountHolderLastName;
     @Column(name = "date_time_inclusion")
     private LocalDateTime dateTimeInclusion;
     @Column(name = "date_time_update")

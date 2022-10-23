@@ -1,9 +1,9 @@
 package br.com.itau.pix.keyprocessor.domain.port;
 
-import br.com.itau.pix.keyprocessor.infra.rest.CreateKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.GetKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.InactivateKeyResponse;
-import br.com.itau.pix.keyprocessor.infra.rest.UpdateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.CreateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.GetKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.InactivateKeyResponse;
+import br.com.itau.pix.keyprocessor.infra.rest.out.UpdateKeyResponse;
 
 import java.util.List;
 
