@@ -77,4 +77,18 @@ public class CreateKeyRequest extends Request {
     public String getAccountHolderLastName() {
         return accountHolderLastName;
     }
+
+    @Override
+    public String toString() {
+        return "CreateKeyRequest{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                ", accountType='" + accountType + '\'' +
+                ", agencyNumber='" + agencyNumber + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", accountHolderName='" + accountHolderName + '\'' +
+                ", accountHolderLastName='" + accountHolderLastName + '\'' +
+                '}';
+    }
 }

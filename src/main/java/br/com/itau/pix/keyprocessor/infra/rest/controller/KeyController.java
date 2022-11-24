@@ -1,6 +1,7 @@
 package br.com.itau.pix.keyprocessor.infra.rest.controller;
 
 import br.com.itau.pix.keyprocessor.domain.usecase.KeyPixService;
+//import br.com.itau.pix.keyprocessor.infra.repository.SqsService;
 import br.com.itau.pix.keyprocessor.infra.rest.in.CreateKeyRequest;
 import br.com.itau.pix.keyprocessor.infra.rest.in.KeyFilterParam;
 import br.com.itau.pix.keyprocessor.infra.rest.in.UpdateKeyRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class KeyController {
 
     private final KeyPixService keyUseCase;
+    //private final SqsService sqsService;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody final CreateKeyRequest createKeyRequest) {
@@ -47,7 +49,6 @@ public class KeyController {
         return ResponseEntity.ok(response);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable final String id, @RequestBody UpdateKeyRequest updateKeyRequest) {
         updateKeyRequest.setId(id);
@@ -61,4 +62,9 @@ public class KeyController {
         return ResponseEntity.ok(response);
     }
 
+//    @PostMapping("/test-sqs")
+//    public ResponseEntity<?> testSqs(@RequestBody final CreateKeyRequest createKeyRequest) {
+//        sqsService.sendMessage(createKeyRequest);
+//        return ResponseEntity.noContent().build();
+//    }
 }
